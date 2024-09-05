@@ -8,20 +8,17 @@ CXXFLAGS = -Wall -Wextra -std=c++14
 BUILD_DIR = build
 
 # Source files
-SRCS = $(wildcard src/*/main.cpp)
+SRCS = $(shell find src -name "*.cpp")
 
 # Executable names (one for each source file)
 TARGETS = $(patsubst src/%/main.cpp, $(BUILD_DIR)/%.bin, $(SRCS))
 
 # Default target
-all: $(BUILD_DIR) $(TARGETS)
+all: $(TARGETS)
 
 # Create directories for each target
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-# Compile source files to executables
 $(BUILD_DIR)/%.bin: src/%/main.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 # Run specified executable
@@ -37,6 +34,6 @@ run-all: $(TARGETS)
 		./$(target); \
 	)
 
-# Clean up build files
+# Clean target
 clean:
 	rm -rf $(BUILD_DIR)
