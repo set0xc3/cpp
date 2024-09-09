@@ -1,0 +1,9 @@
+[submodule "3d-viewer/vendor/imgui"]
+	path = 3d-viewer/vendor/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "3d-viewer/vendor/SDL2"]
+	path = 3d-viewer/vendor/SDL2
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "3d-viewer/vendor/Vulkan-Hpp"]
+	path = 3d-viewer/vendor/Vulkan-Hpp
+	url = https://github.com/KhronosGroup/Vulkan-Hpp.git

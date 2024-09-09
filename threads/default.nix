@@ -1,16 +1,16 @@
-with import <nixpkgs> {}; let
+{pkgs ? import <nixpkgs> {}}: let
   libs = with pkgs; [
   ];
 in
   pkgs.mkShell {
     LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath libs}";
 
-    buildInputs = [
-      bear
+    packages = with pkgs; [
+      boost
+      catch2
       clang
     ];
 
     shellHook = ''
-      # sed -i "s|/home/[^/]*|$HOME|g" compile_commands.json
     '';
   }
