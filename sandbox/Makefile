@@ -2,7 +2,7 @@
 CXX = clang++
 
 # Compiler flags
-CXXFLAGS = -Wall -Wextra -std=c++14
+CXXFLAGS = -Wall -Wextra -std=c++11
 
 # Build directory
 BUILD_DIR = build
@@ -11,15 +11,15 @@ BUILD_DIR = build
 SRCS = $(shell find src -name "*.cpp")
 
 # Executable names (one for each source file)
-TARGETS = $(patsubst src/%/main.cpp, $(BUILD_DIR)/%.bin, $(SRCS))
+TARGETS = $(patsubst src/%.cpp, $(BUILD_DIR)/%.bin, $(SRCS))
 
 # Default target
 all: $(TARGETS)
 
 # Create directories for each target
-$(BUILD_DIR)/%.bin: src/%/main.cpp
+$(BUILD_DIR)/%.bin: src/%.cpp
 	@mkdir -p $(dir $@)
-	bear -- $(CXX) $(CXXFLAGS) -I$(VULKAN_VOLK_INCLUDE) -L$(VULKAN_VOLK_LIB) -I$(SDL2_INCLUDE) -L$(SDL2_LIB) -I$(IMGUI_INCLUDE) -L$(IMGUI_LIB) -lvolk -lSDL2 -limgui $< -o $@
+	bear -- $(CXX) $(CXXFLAGS)  $< -o $@
 
 # Run specified executable
 run: $(BUILD_DIR)
