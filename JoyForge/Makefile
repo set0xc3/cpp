@@ -4,15 +4,6 @@ CXX = clang++
 # Compiler flags
 CXXFLAGS = -Wall -Wextra -std=c++11
 
-# Список библиотек
-LIBS :=
-
-# Список дополнительных флагов
-CXXFLAGS += -I$(BGFX_INCLUDE) \
-						-I$(ENTT_INCLUDE)
-
-LDFLAGS :=
-
 # Build directory
 BUILD_DIR = build
 
@@ -25,10 +16,16 @@ TARGETS = $(patsubst src/%/main.cpp, $(BUILD_DIR)/%.bin, $(SRCS))
 # Default target
 all: $(TARGETS)
 
+# Pre-build
+pre-build:
+	@mkdir -p ./vendor/SDL2/build
+	@cmake -S ./vendor/SDL2 -B ./vendor/SDL2/build
+	@cmake --build ./vendor/SDL2/build -j$(shell nproc)
+
 # Create directories for each target
 $(BUILD_DIR)/%.bin: src/%/main.cpp
 	@mkdir -p $(dir $@)
-	bear -- $(CXX) $(CXXFLAGS) $(LDFLAGS) $< -o $@ $(LIBS)
+	bear -- $(CXX) $(CXXFLAGS) $(NIX_CFLAGS_COMPILE) $< -o $@ $(LIBS)
 
 # Run specified executable
 run: $(BUILD_DIR)

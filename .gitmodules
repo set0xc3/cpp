@@ -7,3 +7,9 @@
 [submodule "3d-viewer/vendor/Vulkan-Hpp"]
 	path = 3d-viewer/vendor/Vulkan-Hpp
 	url = https://github.com/KhronosGroup/Vulkan-Hpp.git
+[submodule "JoyForge/vendor/SDL2"]
+	path = JoyForge/vendor/SDL2
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "JoyForge/vendor/imgui"]
+	path = JoyForge/vendor/imgui
+	url = https://github.com/ocornut/imgui.git
